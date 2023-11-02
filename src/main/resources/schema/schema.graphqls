@@ -1,0 +1,106 @@
+type Query {
+    getWorkspaces(userId: String!): [Workspace]
+    viewWorkspace(workspaceId: String!): Workspace
+
+    # getChannels(workspaceId: String): [Channel]
+    viewChannel(channelId: String!): Channel
+    getPosts(channelId: String!): [Message]
+
+    getJoinedMembers(workspaceId: String!): [User]
+}
+
+type Mutation {
+    addWorkspace(userId: String!, workspaceName: String!): Workspace
+    joinWorkspace(workspaceId: String!, userIdList: [String!]!): Boolean
+
+    addChannel(input: ChannelInput): Channel
+
+#    sendChat(message: ChatInput!): Boolean
+    addPost(message: PostInput!): Message
+
+    removeWorkspace(workspaceId: String!): Boolean
+    removeChannel(channelId: String!): Boolean
+}
+
+#type Subscription {
+#    receiveChat(channelId: String!): Message
+#}
+
+type User {
+    id: String
+    username: String!
+    userIcon: Image
+    email: EmailAddress!
+}
+
+type Image {
+    url: String
+}
+
+type Workspace {
+    id: String
+    userId: String
+    workspaceName: String!
+    createTime: DateTime!
+    channels: [Channel]
+}
+
+type Channel {
+    id: String!
+    workspaceId: String!
+    channelName: String!
+    channelType: ChannelType
+    createTime: DateTime!
+}
+
+interface Message {
+    id: String
+    channelId: String!
+    userId: String!
+    submittedTime: DateTime
+}
+
+type PostMessage implements Message {
+    id: String
+    channelId: String!
+    userId: String!
+    submittedTime: DateTime
+
+    title: String!
+    text: String!
+}
+
+type ChatMessage implements Message {
+    id: String
+    channelId: String!
+    userId: String!
+    submittedTime: DateTime
+
+    text: String!
+}
+
+input ChannelInput {
+    workspaceId: String!
+    channelName: String!
+    channelType: ChannelType!
+}
+
+input PostInput {
+    channelId: String!
+    userId: String!
+    title: String!
+    text: String!
+}
+
+input ChatInput {
+    channelId: String!
+    userId: String!
+    text: String!
+}
+
+enum ChannelType {
+    POST,
+    CHAT
+}
+scalar EmailAddress
+scalar DateTime
