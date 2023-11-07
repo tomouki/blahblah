@@ -15,16 +15,16 @@ type Mutation {
 
     addChannel(input: ChannelInput): Channel
 
-#    sendChat(message: ChatInput!): Boolean
+    sendChat(message: ChatInput!): Message
     addPost(message: PostInput!): Message
 
     removeWorkspace(workspaceId: String!): Boolean
     removeChannel(channelId: String!): Boolean
 }
 
-#type Subscription {
-#    receiveChat(channelId: String!): Message
-#}
+type Subscription {
+    receiveChat(channelId: String!): Message
+}
 
 type User {
     id: String

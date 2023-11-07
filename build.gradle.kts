@@ -63,6 +63,9 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
+
+    /*redis*/
+    implementation ("org.springframework.boot:spring-boot-starter-data-redis")
 //    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 //    implementation("io.r2dbc:r2dbc-h2")
 
@@ -75,6 +78,7 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-webflux-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
+    implementation("com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
